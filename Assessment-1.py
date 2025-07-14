@@ -17,12 +17,12 @@ class block:
 
 
 class blockchain:
-    def __init__(self, index, previous_hash, timestamp, data, proof):
+    def __init__(self):
         self.chain = [self.create_genesis_block()]
         self.difficulty = 4
 
     def create_genesis_block(self):
-        genesis_block = block()
+        genesis_block: block = block()
 
 
     def get_latest_block(self):
@@ -39,8 +39,6 @@ class blockchain:
         while check_proof is False:
             hash_operation = hashlib.sha256()
             str_operation = str(new_proof).encode().hexdigest()
-
-
 
 
     def add_data(self, data):
