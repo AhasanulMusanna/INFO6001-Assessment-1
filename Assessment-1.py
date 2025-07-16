@@ -13,7 +13,8 @@ class block:
         self.hash = self.calculate_hash()
 
     def calculate_hash(self):
-        sha = hashlib.sha256()
+        new_block_chain = str(self.index) + str(self.previous_hash) + str(self.timestamp) + str(self.data) + str(self.proof)
+        return hashlib.sha256(new_block_chain).hexdigest()
 
 
 class blockchain:
@@ -22,27 +23,32 @@ class blockchain:
         self.difficulty = 4
 
     def create_genesis_block(self):
-        genesis_block: block = block()
+        return Block("Genesis Block", "0")
 
 
     def get_latest_block(self):
-        latest_block = self.chain[-1]
+        return self.chain[-1]
 
 
     def add_block(self, new_block):
-        self.chain.append(block)
+        self.chain.append(new_block)
 
 
     def proof_of_work(self, previous_proof):
         new_proof = 1
         check_proof = False
         while check_proof is False:
-            hash_operation = hashlib.sha256()
-            str_operation = str(new_proof).encode().hexdigest()
+            hash_operation = hashlib.sha256(str(new_proof ** 2 - previous_proof ** 2).encode()).hexdigest()
+            if hash_operation[:self.difficulty] == '0000':
+                check_proof = True
+            else:
+                new_proof += 1
+        return new_proof
 
 
     def add_data(self, data):
         new_block = blockchain.add_block(self, data)
+        proof = self.proof_of_work(new_block)
 
     def is_chain_valid(self, block):
         previous_block = self.chain[-1]
