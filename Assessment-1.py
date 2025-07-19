@@ -1,6 +1,5 @@
 import hashlib
 import datetime
-import json
 
 
 class Block:
@@ -33,7 +32,7 @@ class Blockchain:
 
     def add_block(self, new_block):
         previous_block = self.get_latest_block()
-        new_block = Block(len(self.chain), datetime.time(), data, previous_block.hash)
+        new_block = Block(len(self.chain), datetime.time(), previous_block.hash)
         self.chain.append(new_block)
 
 
@@ -50,8 +49,7 @@ class Blockchain:
 
 
     def add_data(self, data):
-        new_block = blockchain.add_block(self, data)
-        proof = self.proof_of_work(new_block)
+        proof = self.proof_of_work
 
 
     def is_chain_valid(self, block):
