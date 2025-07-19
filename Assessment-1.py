@@ -3,7 +3,7 @@ import datetime
 import json
 
 
-class block:
+class Block:
     def __init__(self, index, previous_hash, timestamp, data, proof):
         self.index = index
         self.previous_hash = previous_hash
@@ -13,17 +13,17 @@ class block:
         self.hash = self.calculate_hash()
 
     def calculate_hash(self):
-        new_block_chain = str(self.index) + str(self.previous_hash) + str(self.timestamp) + str(self.data) + str(self.proof)
-        return hashlib.sha256(new_block_chain).hexdigest()
+        new_block_chain = f"{self.index}{self.timestamp}{self.data}{self.previous_hash}{self.proof}"
+        return hashlib.sha256(new_block_chain.encode()).hexdigest()
 
 
-class blockchain:
+class Blockchain:
     def __init__(self):
         self.chain = [self.create_genesis_block()]
         self.difficulty = 4
 
     def create_genesis_block(self):
-        return Block("Genesis Block", "0")
+        return Block(0, "0", time.time(), "Genesis Block", 1)
 
 
     def get_latest_block(self):
@@ -57,7 +57,7 @@ class blockchain:
 
 
 if __name__ == "__main__":
-            Blockchain = blockchain()
+            blockchain = Blockchain()
 
             print("Mining block 1...")
             blockchain.add_data("Transaction data for Block 1")
