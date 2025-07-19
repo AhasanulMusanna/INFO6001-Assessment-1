@@ -12,6 +12,7 @@ class Block:
         self.proof = proof
         self.hash = self.calculate_hash()
 
+
     def calculate_hash(self):
         new_block_chain = f"{self.index}{self.timestamp}{self.data}{self.previous_hash}{self.proof}"
         return hashlib.sha256(new_block_chain.encode()).hexdigest()
@@ -22,15 +23,17 @@ class Blockchain:
         self.chain = [self.create_genesis_block()]
         self.difficulty = 4
 
-    def create_genesis_block(self):
-        return Block(0, "0", time.time(), "Genesis Block", 1)
 
+    def create_genesis_block(self):
+        return Block(index=0, previous_hash="0", timestamp=str(datetime.time()), data="Genesis Block", proof=1)
 
     def get_latest_block(self):
         return self.chain[-1]
 
 
     def add_block(self, new_block):
+        previous_block = self.get_latest_block()
+        new_block = Block(len(self.chain), datetime.time(), data, previous_block.hash)
         self.chain.append(new_block)
 
 
@@ -50,10 +53,10 @@ class Blockchain:
         new_block = blockchain.add_block(self, data)
         proof = self.proof_of_work(new_block)
 
+
     def is_chain_valid(self, block):
         previous_block = self.chain[-1]
         block_index = 1
-
 
 
 if __name__ == "__main__":
