@@ -58,15 +58,18 @@ class Blockchain:
 
 
 if __name__ == "__main__":
-            blockchain = Blockchain()
+   blockchain = Blockchain()
 
+   while True:
+        question = input("1. Add a new transaction\n2. Display Blockchain\n3. Validate Blockchain\n4. Exit")
+        if question == "1":
             print("Mining block 1...")
-            blockchain.add_data("Transaction data for Block 1")
-
+            blockchain.add_data(data)
+        elif question == "2":
             print("Mining block 2...")
             blockchain.add_data("Transaction data for Block 2")
-
+        elif question == "3":
             print("\nBlockchain validity:", blockchain.is_chain_valid())
-
-            for block in blockchain.chain:
-                print(f"Block {block.index} | Hash: {block.hash} | Previous Hash: {block.previous_hash}")
+        elif question == "4":
+            print("Exiting...")
+            break
