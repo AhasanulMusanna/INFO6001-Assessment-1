@@ -64,7 +64,11 @@ class Blockchain:
 
     def display_chain(self):
         for block in self.chain:
-            print(f"{block.index}: {block.previous_hash}")
+            print(f"Block {block.index} [Hash:{block.hash}]")
+            print(f"Previous Hash: {block.previous_hash}")
+            print(f"Block Data: {block.data}")
+            print(f"Block Proof: {block.proof}")
+            print(f"Timestamp: {block.timestamp}")
 
 
 if __name__ == "__main__":
@@ -84,6 +88,7 @@ if __name__ == "__main__":
             print("\nBlockchain validity:", blockchain.is_chain_valid())
         elif question == "4":
             print("Exiting...")
+            print("Successfully Exited")
             break
         else:
             print("Wrong Input!! Please Input Again")
