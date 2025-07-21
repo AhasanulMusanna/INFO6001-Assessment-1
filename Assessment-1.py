@@ -53,8 +53,14 @@ class Blockchain:
 
 
     def is_chain_valid(self, block):
-        previous_block = self.chain[-1]
-        block_index = 1
+        for i in range(1, len(self.chain)):
+            current_block = self.chain[i]
+            previous_block = self.chain[-1]
+            if current_block != current_block:
+                return False
+            if current_block != previous_block:
+                return False
+        return True
 
 
 if __name__ == "__main__":
@@ -63,7 +69,8 @@ if __name__ == "__main__":
    while True:
         question = input("1. Add a new transaction\n2. Display Blockchain\n3. Validate Blockchain\n4. Exit")
         if question == "1":
-            print("Mining block 1...")
+            data = input ("Enter Your Transaction Data: ")
+            print("Mining block ....")
             blockchain.add_data(data)
         elif question == "2":
             print("Mining block 2...")
