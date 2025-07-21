@@ -52,13 +52,13 @@ class Blockchain:
         proof = self.proof_of_work
 
 
-    def is_chain_valid(self, block):
+    def is_chain_valid(self):
         for i in range(1, len(self.chain)):
             current_block = self.chain[i]
             previous_block = self.chain[-1]
-            if current_block != current_block:
+            if current_block.hash != current_block.create_hash():
                 return False
-            if current_block != previous_block:
+            if current_block.prior_hash != previous_block.hash:
                 return False
         return True
 
