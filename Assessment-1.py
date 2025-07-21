@@ -24,7 +24,7 @@ class Blockchain:
 
 
     def create_genesis_block(self):
-        return Block(index=0, previous_hash="0", timestamp=str(datetime.datetime.now()), data="Genesis Block", proof=1)
+        return Block(index=0, previous_hash="0", timestamp=datetime.datetime.now(), data="Genesis Block", proof=1)
 
     def get_latest_block(self):
         return self.chain[-1]
@@ -50,7 +50,7 @@ class Blockchain:
         previous_block = self.get_latest_block()
         previous_proof = previous_block.proof
         proof = self.proof_of_work(previous_proof)
-        new_block = Block(len(self.chain), previous_hash=previous_block.hash, timestamp=str(datetime.datetime.now()), data=data, proof=proof)
+        new_block = Block(len(self.chain), previous_hash=previous_block.hash, timestamp=datetime.datetime.now(), data=data, proof=proof)
         self.add_block(new_block)
 
 
@@ -66,7 +66,8 @@ class Blockchain:
 
     def display_chain(self):
         for block in self.chain:
-            print(f"Block {block.index} [Hash:{block.hash}]")
+            print(f"\nBlock {block.index}")
+            print(f"Hash: {block.hash}")
             print(f"Previous Hash: {block.previous_hash}")
             print(f"Block Data: {block.data}")
             print(f"Block Proof: {block.proof}")
@@ -77,6 +78,7 @@ if __name__ == "__main__":
    blockchain = Blockchain()
 
    while True:
+        print("This is your Blockchain Application:")
         question = input("1. Add a new transaction\n2. Display Blockchain\n3. Validate Blockchain\n4. Exit")
         if question == "1":
             data = input ("Enter Your Transaction Data: ")
