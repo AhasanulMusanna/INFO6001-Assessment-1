@@ -62,6 +62,10 @@ class Blockchain:
                 return False
         return True
 
+    def display_chain(self):
+        for block in self.chain:
+            print(f"{block.index}: {block.previous_hash}")
+
 
 if __name__ == "__main__":
    blockchain = Blockchain()
@@ -70,11 +74,12 @@ if __name__ == "__main__":
         question = input("1. Add a new transaction\n2. Display Blockchain\n3. Validate Blockchain\n4. Exit")
         if question == "1":
             data = input ("Enter Your Transaction Data: ")
-            print("Mining block ....")
+            print("Mining block.....")
             blockchain.add_data(data)
+            print("Block successfully added to the Blockchain")
         elif question == "2":
-            print("Mining block 2...")
-            blockchain.add_data("Transaction data for Block 2")
+            print("This is the current Blockchain:")
+            blockchain.display_chain()
         elif question == "3":
             print("\nBlockchain validity:", blockchain.is_chain_valid())
         elif question == "4":
